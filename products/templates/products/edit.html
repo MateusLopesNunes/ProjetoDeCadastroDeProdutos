@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}Editar produto{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>atualize os dados do produto: {{ product.name }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|bootstrap }}
+            <input type="submit" value="Atualizar" class="btn btn-success mt-2">
+        </form>
+    </div>
+{% endblock %}

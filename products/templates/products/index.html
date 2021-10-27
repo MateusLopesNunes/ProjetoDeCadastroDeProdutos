@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Página home{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Home</h1>
+        <div class="d-flex flex-row bd-highlight mb-3">
+            <a href="newProduct/" class="">
+                <div class="btn btn-primary">
+                    <span>Adcionar produto</span>
+                </div>
+            </a>
+            <form class="mx-3 w-50" method="get" id="search-form">
+                <input type="search" name="search" id="search" class="form-control" placeholder="Search">
+            </form>
+            <div>
+                <input type="submit" name="btn" id="btn" value="Search" class="btn btn-btn btn-primary" onclick="searchProduct()">
+            </div>
+        </div>
+        {% if messages %}
+            <ul class="messages mt-2">
+                {% for message in messages %}
+                    <li {% if message.tags %}class="alert alert-{{ message.tags }}"{% endif %}>
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <table class="table table-striped">
+            <thead>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th></th>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.price }}</td>
+                        <td><a class="btn btn-success w-75" href="edit/{{ product.id }}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a class="btn btn-danger w-75" href="delete/{{ product.id }}"><i class="far fa-trash-alt"></i></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
